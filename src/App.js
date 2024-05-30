@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import UserForm from "./components/UserForm";
 
 const AppLayout = () => {
   return (
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <h1>Login</h1>,
+        element: <UserForm />,
+      },
+      {
+        path: "signup",
+        element: <UserForm type="signup" />,
       },
       {
         path: "browse",

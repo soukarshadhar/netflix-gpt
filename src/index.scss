@@ -1,0 +1,108 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$netflix-primary-color: rgb(229, 9, 20);
+$netflix-secondary-color: rgb(193, 17, 25);
+$netflix-third-color: rgb(153, 22, 29);
+$error-message-color: rgb(235, 57, 66);
+$focus-ring-color: $white;
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+html,
+#root {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.netflix-background {
+  background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/a99688ca-33c3-4099-9baa-07a2e2acb398/ca15fd28-b624-4852-8bfe-9cdd5c88475d/IN-en-20240520-popsignuptwoweeks-perspective_alpha_website_small.jpg");
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  color: $netflix-primary-color;
+  height: 2.5rem;
+}
+
+.title {
+  font-weight: 900;
+  font-size: 3rem;
+}
+
+.btn-signin {
+  background-color: $netflix-primary-color;
+  font-size: 14px;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+.btn-signin:hover {
+  background-color: $netflix-secondary-color;
+}
+
+.px-4-5 {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.mx-6 {
+  margin-left: $spacer * 21;
+  margin-right: $spacer * 21;
+}
+
+.bg-dark-gradient {
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0.75) 70%
+  );
+}
+
+.form-card {
+  padding: 2rem 3rem;
+  margin-top: $spacer * 6.5;
+}
+
+.btn-submit {
+  background-color: $netflix-primary-color;
+  border-color: $netflix-primary-color;
+}
+
+.btn-submit:hover {
+  background-color: $netflix-secondary-color;
+  border-color: $netflix-secondary-color;
+}
+
+.btn-submit:active {
+  background-color: $netflix-third-color !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-color: $netflix-third-color !important;
+}
+
+.top-fixed {
+  top: 148px;
+}
+.form-floating > label {
+  color: $white !important;
+}
+
+.form-floating > label::after {
+  background-color: $black !important;
+}
+
+.form-control:focus {
+  border-color: $white;
+}
+
+.error-message {
+  color: $error-message-color;
+}
+
+.error-icon {
+  color: $error-message-color;
+}
