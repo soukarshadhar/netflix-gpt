@@ -13,7 +13,9 @@
 11. Create user implemented using firebase auth service
 12. User login implemented using firebase auth service
 13. Project is setup with Redux store
-14. User detail is stored in the redux store
+14. Implemented - On login or signup user detail is stored in the redux store
+15. Implemented - On successful login or signup user is navigated to browse page
+16. Implemented - On logout from browse page user is navigated back to home page
 
 # Features
 

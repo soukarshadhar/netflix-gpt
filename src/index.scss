@@ -45,9 +45,19 @@ html,
   background-color: $netflix-secondary-color;
 }
 
+.btn-signin:active {
+  background-color: $netflix-third-color !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-color: $netflix-third-color !important;
+}
+
 .px-4-5 {
   padding-right: 2rem;
   padding-left: 2rem;
+}
+
+.pt-6 {
+  padding-top: $spacer * 15;
 }
 
 .mx-6 {
@@ -105,4 +115,8 @@ html,
 
 .error-icon {
   color: $error-message-color;
+}
+
+.user-profile-icon {
+  color: $netflix-primary-color;
 }

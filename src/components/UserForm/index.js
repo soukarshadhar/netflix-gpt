@@ -1,14 +1,17 @@
 import { useState, useRef } from "react";
 import { Form, FloatingLabel, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/user";
 
 const EMAIL_ID = "email";
 const PASSWORD_ID = "password";
@@ -20,6 +23,8 @@ const UserForm = ({ type = "signin" }) => {
   const passwordRef = useRef(null);
   const [errors, setErrors] = useState({});
   const [authError, setAuthError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOnSetErrors = (fieldId, field) => {
     if (field.valid) {
@@ -62,20 +67,38 @@ const UserForm = ({ type = "signin" }) => {
   };
 
   const createUser = async () => {
-    const email = emailRef?.current?.value;
+    const userEmail = emailRef?.current?.value;
     const password = passwordRef?.current?.value;
+    const name = fullNameRef?.current?.value;
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        userEmail,
+        password
+      );
+      await updateProfile(user, { displayName: name });
+      const { uid, email, displayName } = user;
+      dispatch(addUser({ uid, email, displayName }));
+      navigate("/browse");
     } catch (err) {
       setAuthError(err.code);
     }
   };
 
   const loginInUser = async () => {
-    const email = emailRef?.current?.value;
+    const userEmail = emailRef?.current?.value;
     const password = passwordRef?.current?.value;
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const { user } = await signInWithEmailAndPassword(
+        auth,
+        userEmail,
+        password
+      );
+      const { uid, email, displayName } = user;
+      dispatch(addUser({ uid, email, displayName }));
+      navigate("/browse");
     } catch (err) {
       setAuthError(err.code);
     }
@@ -112,13 +135,13 @@ const UserForm = ({ type = "signin" }) => {
             {type === "signin" ? "Sign In" : "Sign Up"}
           </h1>
           {type === "signup" && (
-            <FloatingLabel className="mb-3 text-white" label="Full Name">
+            <FloatingLabel className="mb-3 text-white" label="Name">
               <Form.Control
                 id={FULL_NAME_ID}
                 ref={fullNameRef}
                 className="bg-black bg-opacity-75 text-light"
                 type="text"
-                placeholder="Full Name"
+                placeholder="Name"
                 onBlur={handleOnBlur}
               />
               {renderError(FULL_NAME_ID)}
