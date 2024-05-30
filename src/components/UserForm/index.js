@@ -65,12 +65,7 @@ const UserForm = ({ type = "signin" }) => {
     const email = emailRef?.current?.value;
     const password = passwordRef?.current?.value;
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCredential.user);
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
       setAuthError(err.code);
     }
@@ -80,12 +75,7 @@ const UserForm = ({ type = "signin" }) => {
     const email = emailRef?.current?.value;
     const password = passwordRef?.current?.value;
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCredential.user);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       setAuthError(err.code);
     }

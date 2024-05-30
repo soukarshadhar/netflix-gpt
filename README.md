@@ -12,6 +12,8 @@
 10. Learnt about useRef hook
 11. Create user implemented using firebase auth service
 12. User login implemented using firebase auth service
+13. Project is setup with Redux store
+14. User detail is stored in the redux store
 
 # Features
 

@@ -10,3 +10,4 @@
 /build
 
 /.firebase
+/src/firebaseConfig.json
