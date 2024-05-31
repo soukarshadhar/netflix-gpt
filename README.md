@@ -16,6 +16,8 @@
 14. Implemented - On login or signup user detail is stored in the redux store
 15. Implemented - On successful login or signup user is navigated to browse page
 16. Implemented - On logout from browse page user is navigated back to home page
+17. If user is logged in and visits `/login` or `/signup` or `/` page then redirect user to `/browse` page
+18. If user is logged out and visits `/browse` page then redirect user to `/` page
 
 # Features
 

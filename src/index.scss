@@ -15,6 +15,7 @@ html,
 #root {
   height: 100%;
   font-family: sans-serif;
+  background-color: $black;
 }
 
 .netflix-background {
@@ -24,9 +25,14 @@ html,
   background-position: center;
 }
 
-.logo {
+.logo-md {
   color: $netflix-primary-color;
   height: 2.5rem;
+}
+
+.logo-sm {
+  color: $netflix-primary-color;
+  height: 1.8rem;
 }
 
 .title {
@@ -56,6 +62,12 @@ html,
   padding-left: 2rem;
 }
 
+.about-video {
+  margin-right: $spacer * 30;
+  margin-left: $spacer * 5;
+  top: 30%;
+}
+
 .pt-6 {
   padding-top: $spacer * 15;
 }
@@ -70,6 +82,14 @@ html,
     to top,
     rgba(255, 255, 255, 0),
     rgba(0, 0, 0, 0.75) 70%
+  );
+}
+
+.browse-header {
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0.7) 45%
   );
 }
 
@@ -119,4 +139,12 @@ html,
 
 .user-profile-icon {
   color: $netflix-primary-color;
+}
+
+.list-container {
+  transform: translateY(-210px);
+}
+
+.list-container > #list {
+  white-space: nowrap;
 }

@@ -40,9 +40,13 @@ const Header = () => {
   };
 
   return (
-    <div className="py-4 px-4-5 d-flex position-absolute justify-content-between w-100 z-1">
+    <div
+      className={`py-4 px-4-5 d-flex position-absolute justify-content-between w-100 z-1${
+        pathname === "/browse" ? " browse-header" : ""
+      }`}
+    >
       <Link to="/">
-        <Logo />
+        <Logo className={pathname === "/browse" ? "logo-sm" : "logo-md"} />
       </Link>
       {pathname === "/" && (
         <Link
@@ -55,7 +59,6 @@ const Header = () => {
       {pathname === "/browse" && !!user && (
         <Dropdown>
           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-            Welcome {user && user.displayName}
             <FontAwesomeIcon
               className="fs-1 user-profile-icon"
               icon={faUserCircle}
@@ -63,6 +66,9 @@ const Header = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
+            <Dropdown.Item as="div" className="fw-bold">
+              Welcome {user && user.displayName}
+            </Dropdown.Item>
             <Dropdown.Item onClick={handleOnSignOutClick}>
               Sign Out
             </Dropdown.Item>

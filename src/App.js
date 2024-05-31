@@ -1,12 +1,37 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import UserForm from "./components/UserForm";
 import Browse from "./components/Browse";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./store/appStore";
 
 const AppLayout = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (pathname === "/browse" && !user) {
+      navigate("/");
+    }
+
+    if (
+      (pathname === "/" || pathname === "/login" || pathname === "/signup") &&
+      !!user
+    ) {
+      navigate("/browse");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
   return (
     <>
       <Header />
