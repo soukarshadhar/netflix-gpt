@@ -1,31 +1,25 @@
-import { addMovie as addNowPlayingMovieAction } from "../store/nowPlayingMovies";
-import { addMovie as addPopularMovieAction } from "../store/popularMovies";
-import { addMovie as addTrendingMovieAction } from "../store/trendingMovie";
+export const NOW_PLAYING_TITLE = "Now Playing";
+export const TOP_RATED_TITLE = "Top Rated";
+export const ON_THE_AIR_TITLE = "On The Air";
+export const ASSET_THUMBNAIL_URL = "https://image.tmdb.org/t/p/w154/";
 
-export const TRENDING_TV_SERIES = "tv";
-
-export const MOVIES_BY = Object.freeze({
-  NOW_PLAYING: "nowPlaying",
-  POPULAR: "popular",
+export const BROWSE_TAB = Object.freeze({
+  MOVIES: "movies",
+  TV_SHOWS: "tvShows",
+  GPT_SEARCH: "GPTSearch",
 });
 
-export const MOVIES = Object.freeze({
-  trending: { urlPath: "movie", action: addTrendingMovieAction },
-  nowPlaying: {
-    title: "Now Playing",
-    urlPath: "movie/now_playing",
-    key: "nowPlayingMovies",
-    action: addNowPlayingMovieAction,
+export const ASSET_BY = Object.freeze({
+  TRENDING_MOVIE: { key: "trendingMovie", urlPath: "movie" },
+  TRENDING_TV_SERIES: { key: "trendingTvSeries", urlPath: "tv" },
+  NOW_PLAYING_MOVIES: { key: "nowPlayingMovies", urlPath: "movie/now_playing" },
+  TOP_RATED_MOVIES: { key: "topRatedMovies", urlPath: "movie/top_rated" },
+  NOW_PLAYING_TV_SHOWS: {
+    key: "nowPlayingTvShows",
+    urlPath: "tv/on_the_air",
   },
-  popular: {
-    title: "Popular",
-    urlPath: "movie/popular",
-    key: "popularMovies",
-    action: addPopularMovieAction,
-  },
+  TOP_RATED_TV_SHOWS: { key: "topRatedTvShows", urlPath: "tv/top_rated" },
 });
-
-export const MOVIE_THUMBNAIL_URL = "https://image.tmdb.org/t/p/w154/";
 
 export const GET_REQUEST_INIT = {
   method: "GET",

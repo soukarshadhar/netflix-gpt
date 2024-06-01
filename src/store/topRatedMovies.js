@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const nowPlayingMoviesSlice = createSlice({
-  name: "nowPlayingMovies",
+const topRatedMoviesSlice = createSlice({
+  name: "topRatedMovies",
   initialState: {
     page: 1,
     list: [],
@@ -20,5 +20,5 @@ const nowPlayingMoviesSlice = createSlice({
   },
 });
 
-export const { addMovie, removeMovie } = nowPlayingMoviesSlice.actions;
-export default nowPlayingMoviesSlice.reducer;
+export const { addMovie, removeMovie } = topRatedMoviesSlice.actions;
+export default topRatedMoviesSlice.reducer;

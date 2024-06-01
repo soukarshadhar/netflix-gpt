@@ -6,16 +6,19 @@ $netflix-third-color: rgb(153, 22, 29);
 $error-message-color: rgb(235, 57, 66);
 $focus-ring-color: $white;
 
-body {
-  margin: 0;
+html {
   height: 100%;
 }
 
-html,
+body {
+  margin: 0;
+  height: 100%;
+  background-color: $black;
+  font-family: sans-serif;
+}
+
 #root {
   height: 100%;
-  font-family: sans-serif;
-  background-color: $black;
 }
 
 .netflix-background {
@@ -57,15 +60,19 @@ html,
   border-color: $netflix-third-color !important;
 }
 
-.px-4-5 {
-  padding-right: 2rem;
-  padding-left: 2rem;
+.header-container {
+  padding-right: $spacer * 3;
+  padding-left: $spacer * 3;
 }
 
 .about-video {
-  margin-right: $spacer * 30;
-  margin-left: $spacer * 5;
+  margin-right: $spacer * 40;
+  margin-left: $spacer * 3;
   top: 30%;
+}
+
+.video-iframe {
+  transform: translateY(-90px);
 }
 
 .pt-6 {
@@ -89,13 +96,21 @@ html,
   background-image: linear-gradient(
     to top,
     rgba(255, 255, 255, 0),
-    rgba(0, 0, 0, 0.7) 45%
+    rgba(0, 0, 0, 0.5) 40%
   );
 }
 
 .form-card {
   padding: 2rem 3rem;
   margin-top: $spacer * 6.5;
+}
+
+.home {
+  margin-top: 11rem;
+}
+
+.video-description {
+  height: 5rem;
 }
 
 .btn-submit {
@@ -142,7 +157,7 @@ html,
 }
 
 .list-container {
-  transform: translateY(-210px);
+  transform: translateY(-14rem);
 }
 
 .list-container > #list {

@@ -18,6 +18,11 @@
 16. Implemented - On logout from browse page user is navigated back to home page
 17. If user is logged in and visits `/login` or `/signup` or `/` page then redirect user to `/browse` page
 18. If user is logged out and visits `/browse` page then redirect user to `/` page
+19. Integrated the app with TMDB APIs for movies and TV shows
+20. Implemented - Trending movie clips will be shown on the background and will play in loop
+21. Implemented - Now playing and top rated movie list to be shown in horizontal scroll mode
+22. Used YouTube iframe API to show clips related to trending movies
+23. Implemented `useFetchList` and `useFetchTrending` to fetch data from TMDB API
 
 # Features
 

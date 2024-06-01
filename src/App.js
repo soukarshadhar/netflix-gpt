@@ -9,7 +9,7 @@ import {
 import Header from "./components/Header";
 import Home from "./components/Home";
 import UserForm from "./components/UserForm";
-import Browse from "./components/Browse";
+import BrowseContainer from "./components/BrowseContainer";
 import { Provider, useSelector } from "react-redux";
 import store from "./store/appStore";
 
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
       },
       {
         path: "browse",
-        element: <Browse />,
+        element: <BrowseContainer />,
       },
     ],
   },

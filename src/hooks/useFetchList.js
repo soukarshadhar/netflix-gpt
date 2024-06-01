@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { GET_REQUEST_INIT } from "../utils/constants";
 
-const useFetchList = (type, action, pageNo) => {
+const useFetchList = (path, action, pageNo) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -10,15 +11,8 @@ const useFetchList = (type, action, pageNo) => {
     const fetchList = async () => {
       try {
         const data = await fetch(
-          `https://api.themoviedb.org/3/${type}?language=en-US&page=${page}`,
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjE2MDQ3ZGZmMTY0YjQxYWUyMGU5NTJjZTc3ZWJiMSIsInN1YiI6IjY2NTk3OWRkNTNlYmQ1ZDY4Njk0MWI5YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lQAREVgQK8S1vKFaFpfNAcdqrmTltFQcawdkb6miaE0",
-            },
-          }
+          `https://api.themoviedb.org/3/${path}?language=en-US&page=${page}`,
+          GET_REQUEST_INIT
         );
         const response = await data.json();
         action &&
@@ -32,7 +26,7 @@ const useFetchList = (type, action, pageNo) => {
 
     fetchList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageNo]);
+  }, [path, pageNo]);
 };
 
 export default useFetchList;

@@ -7,8 +7,13 @@ const trendingMovieSlice = createSlice({
     addMovie: (state, action) => {
       return action.payload;
     },
+    removeMovie: (state) => {
+      state.page = 1;
+      state.list = [];
+      state.totalPages = 0;
+    },
   },
 });
 
-export const { addMovie } = trendingMovieSlice.actions;
+export const { addMovie, removeMovie } = trendingMovieSlice.actions;
 export default trendingMovieSlice.reducer;
