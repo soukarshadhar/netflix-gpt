@@ -8,11 +8,11 @@ const topRatedMoviesSlice = createSlice({
     totalPages: 0,
   },
   reducers: {
-    addMovie: (state, action) => {
+    add: (state, action) => {
       state.list = action.payload.list;
       state.totalPages = action.payload.totalPages;
     },
-    removeMovie: (state) => {
+    remove: (state) => {
       state.page = 1;
       state.list = [];
       state.totalPages = 0;
@@ -20,5 +20,5 @@ const topRatedMoviesSlice = createSlice({
   },
 });
 
-export const { addMovie, removeMovie } = topRatedMoviesSlice.actions;
+export const { add, remove } = topRatedMoviesSlice.actions;
 export default topRatedMoviesSlice.reducer;

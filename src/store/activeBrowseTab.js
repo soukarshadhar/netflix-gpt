@@ -3,7 +3,7 @@ import { BROWSE_TAB } from "../utils/constants";
 
 const activeBrowseTabSlice = createSlice({
   name: "activeBrowseTab",
-  initialState: BROWSE_TAB.MOVIES,
+  initialState: BROWSE_TAB.movies,
   reducers: {
     setBrowseTab: (state, action) => {
       return action.payload;

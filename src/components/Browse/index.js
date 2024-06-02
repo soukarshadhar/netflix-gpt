@@ -21,24 +21,24 @@ const Browse = () => {
   let secondListType = null;
   let title = "";
 
-  if (activeTab === BROWSE_TAB.MOVIES) {
-    path = ASSET_BY.TRENDING_MOVIE.urlPath;
-    action = addAssetActions[ASSET_BY.TRENDING_MOVIE.key];
-    selectorKey = ASSET_BY.TRENDING_MOVIE.key;
-    firstListType = ASSET_BY.NOW_PLAYING_MOVIES;
-    secondListType = ASSET_BY.TOP_RATED_MOVIES;
+  if (activeTab === BROWSE_TAB.movies) {
+    path = ASSET_BY.trendingMovie.urlPath;
+    action = addAssetActions[ASSET_BY.trendingMovie.key];
+    selectorKey = ASSET_BY.trendingMovie.key;
+    firstListType = ASSET_BY.nowPlayingMovies;
+    secondListType = ASSET_BY.topRatedMovies;
     title = NOW_PLAYING_TITLE;
   } else {
-    path = ASSET_BY.TRENDING_TV_SERIES.urlPath;
-    action = addAssetActions[ASSET_BY.TRENDING_TV_SERIES.key];
-    selectorKey = ASSET_BY.TRENDING_TV_SERIES.key;
-    firstListType = ASSET_BY.NOW_PLAYING_TV_SHOWS;
-    secondListType = ASSET_BY.TOP_RATED_TV_SHOWS;
+    path = ASSET_BY.trendingTvShow.urlPath;
+    action = addAssetActions[ASSET_BY.trendingTvShow.key];
+    selectorKey = ASSET_BY.trendingTvShow.key;
+    firstListType = ASSET_BY.nowPlayingTvShows;
+    secondListType = ASSET_BY.topRatedTvShows;
     title = ON_THE_AIR_TITLE;
   }
 
-  useFetchTrending(path, action);
   const trendingVideo = useSelector((state) => state[selectorKey]);
+  useFetchTrending(path, action, !!trendingVideo);
 
   if (!trendingVideo) return null;
 

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { GET_REQUEST_INIT } from "../utils/constants";
 
-const useFetchTrending = (path, action) => {
+const useFetchTrending = (path, action, skip = false) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,9 +36,9 @@ const useFetchTrending = (path, action) => {
       }
     };
 
-    fetchTrending();
+    if (!skip) fetchTrending();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path]);
+  }, [path, skip]);
 };
 
 export default useFetchTrending;

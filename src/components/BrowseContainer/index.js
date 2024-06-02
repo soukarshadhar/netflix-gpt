@@ -5,7 +5,7 @@ import Browse from "../Browse";
 const BrowseContainer = () => {
   const activeTab = useSelector((state) => state.activeBrowseTab);
 
-  if (activeTab === BROWSE_TAB.GPT_SEARCH) return <h1>Coming Soon...</h1>;
+  if (activeTab === BROWSE_TAB.GPTSearch) return <h1>Coming Soon...</h1>;
 
   return <Browse />;
 };

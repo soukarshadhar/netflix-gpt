@@ -4,8 +4,8 @@ import VideoCard from "../VideoCard";
 import { addAssetActions } from "../../store/appStore";
 
 const VideoList = ({ type, title }) => {
-  useFetchList(type.urlPath, addAssetActions[type.key]);
   const list = useSelector((state) => state[type.key].list);
+  useFetchList(type.urlPath, addAssetActions[type.key], list.length !== 0);
 
   return (
     <div className="mx-5 mb-3 list-container">

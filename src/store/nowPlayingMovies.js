@@ -8,11 +8,11 @@ const nowPlayingMoviesSlice = createSlice({
     totalPages: 0,
   },
   reducers: {
-    addMovie: (state, action) => {
+    add: (state, action) => {
       state.list = action.payload.list;
       state.totalPages = action.payload.totalPages;
     },
-    removeMovie: (state) => {
+    remove: (state) => {
       state.page = 1;
       state.list = [];
       state.totalPages = 0;
@@ -20,5 +20,5 @@ const nowPlayingMoviesSlice = createSlice({
   },
 });
 
-export const { addMovie, removeMovie } = nowPlayingMoviesSlice.actions;
+export const { add, remove } = nowPlayingMoviesSlice.actions;
 export default nowPlayingMoviesSlice.reducer;

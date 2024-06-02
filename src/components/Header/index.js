@@ -8,23 +8,25 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../../store/user";
-import { removeMovie as removeNowPlayingMovies } from "../../store/nowPlayingMovies";
-import { removeMovie as removeTopRatedMovies } from "../../store/topRatedMovies";
-import { removeMovie as removeTrendingMovies } from "../../store/trendingMovie";
+import { remove as removeNowPlayingMovies } from "../../store/nowPlayingMovies";
+import { remove as removeTopRatedMovies } from "../../store/topRatedMovies";
+import { remove as removeTrendingMovies } from "../../store/trendingMovie";
+import { remove as removeNowPlayingTvShows } from "../../store/nowPlayingTvShows";
+import { remove as removeTopRatedTvShows } from "../../store/topRatedTvShows";
+import { remove as removeTrendingTvShows } from "../../store/trendingTvShow";
 import { setBrowseTab } from "../../store/activeBrowseTab";
 import { BROWSE_TAB } from "../../utils/constants";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-  <a
-    href="/"
+  <span
     ref={ref}
     onClick={(e) => {
-      e.preventDefault();
       onClick(e);
     }}
+    role="button"
   >
     {children}
-  </a>
+  </span>
 ));
 
 const Header = () => {
@@ -34,14 +36,16 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const activeTab = useSelector((state) => state.activeBrowseTab);
 
-  const handleOnSignOutClick = async (e) => {
-    e.preventDefault();
+  const handleOnSignOutClick = async () => {
     try {
       await signOut(auth);
       dispatch(removeUser());
       dispatch(removeNowPlayingMovies());
+      dispatch(removeNowPlayingTvShows());
       dispatch(removeTopRatedMovies());
+      dispatch(removeTopRatedTvShows());
       dispatch(removeTrendingMovies());
+      dispatch(removeTrendingTvShows());
       navigate("/");
     } catch (err) {
       console.log(err.code);
@@ -49,7 +53,14 @@ const Header = () => {
   };
 
   const handleOnSetActiveTab = (e) => {
-    dispatch(setBrowseTab(e.target.id));
+    const tabId = e.target.id;
+    if (
+      BROWSE_TAB.GPTSearch === tabId ||
+      BROWSE_TAB.movies === tabId ||
+      BROWSE_TAB.tvShows === tabId
+    ) {
+      dispatch(setBrowseTab(tabId));
+    }
   };
 
   return (
@@ -68,8 +79,8 @@ const Header = () => {
         {pathname === "/browse" && (
           <>
             <Nav.Link
-              id={BROWSE_TAB.MOVIES}
-              active={activeTab === BROWSE_TAB.MOVIES}
+              id={BROWSE_TAB.movies}
+              active={activeTab === BROWSE_TAB.movies}
               className="py-0 my-auto"
               as="span"
               role="button"
@@ -77,8 +88,8 @@ const Header = () => {
               Movies
             </Nav.Link>
             <Nav.Link
-              id={BROWSE_TAB.TV_SHOWS}
-              active={activeTab === BROWSE_TAB.TV_SHOWS}
+              id={BROWSE_TAB.tvShows}
+              active={activeTab === BROWSE_TAB.tvShows}
               className="py-0 my-auto"
               as="span"
               role="button"
@@ -86,8 +97,8 @@ const Header = () => {
               TV Shows
             </Nav.Link>
             <Nav.Link
-              id={BROWSE_TAB.GPT_SEARCH}
-              active={activeTab === BROWSE_TAB.GPT_SEARCH}
+              id={BROWSE_TAB.GPTSearch}
+              active={activeTab === BROWSE_TAB.GPTSearch}
               className="py-0 my-auto"
               as="span"
               role="button"
@@ -97,11 +108,7 @@ const Header = () => {
           </>
         )}
         {pathname === "/" && (
-          <Nav.Link
-            className="ms-auto"
-            as="span"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <Nav.Link className="ms-auto" as="span">
             <Link
               to="/login"
               className="btn-signin text-decoration-none text-light px-3 py-2 rounded-1"
@@ -111,11 +118,7 @@ const Header = () => {
           </Nav.Link>
         )}
         {pathname === "/browse" && !!user && (
-          <Nav.Link
-            className="ms-auto"
-            as="span"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <Nav.Link className="ms-auto" as="span">
             <Dropdown align="end">
               <Dropdown.Toggle
                 as={CustomToggle}
@@ -129,11 +132,15 @@ const Header = () => {
 
               <Dropdown.Menu>
                 {user?.displayName && (
-                  <Dropdown.Item as="div" className="fw-bold">
+                  <Dropdown.Item as="span" className="fw-bold">
                     Welcome {user.displayName}
                   </Dropdown.Item>
                 )}
-                <Dropdown.Item onClick={handleOnSignOutClick}>
+                <Dropdown.Item
+                  as="span"
+                  role="button"
+                  onClick={handleOnSignOutClick}
+                >
                   Sign Out
                 </Dropdown.Item>
               </Dropdown.Menu>

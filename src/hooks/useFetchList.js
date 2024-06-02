@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { GET_REQUEST_INIT } from "../utils/constants";
 
-const useFetchList = (path, action, pageNo) => {
+const useFetchList = (path, action, skip = false, pageNo) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,9 +24,9 @@ const useFetchList = (path, action, pageNo) => {
       }
     };
 
-    fetchList();
+    if (!skip) fetchList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path, pageNo]);
+  }, [path, skip, pageNo]);
 };
 
 export default useFetchList;

@@ -4,16 +4,14 @@ const trendingMovieSlice = createSlice({
   name: "trendingMovie",
   initialState: null,
   reducers: {
-    addMovie: (state, action) => {
+    add: (state, action) => {
       return action.payload;
     },
-    removeMovie: (state) => {
-      state.page = 1;
-      state.list = [];
-      state.totalPages = 0;
+    remove: () => {
+      return null;
     },
   },
 });
 
-export const { addMovie, removeMovie } = trendingMovieSlice.actions;
+export const { add, remove } = trendingMovieSlice.actions;
 export default trendingMovieSlice.reducer;
