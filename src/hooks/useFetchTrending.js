@@ -9,7 +9,7 @@ const useFetchTrending = (path, action) => {
     const fetchTrending = async () => {
       try {
         const listData = await fetch(
-          `https://api.themoviedb.org/3/trending/${path}/day?language=en-US`,
+          `https://api.themoviedb.org/3/trending/${path}/day?language=en-US&region=IN`,
           GET_REQUEST_INIT
         );
         const listResponse = await listData.json();
@@ -18,7 +18,7 @@ const useFetchTrending = (path, action) => {
         const { id, title, overview, name } = item;
 
         const data = await fetch(
-          `https://api.themoviedb.org/3/${path}/${id}/videos?language=en-US`,
+          `https://api.themoviedb.org/3/${path}/${id}/videos?language=en-US&region=IN`,
           GET_REQUEST_INIT
         );
         const itemResp = await data.json();

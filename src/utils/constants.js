@@ -25,7 +25,6 @@ export const GET_REQUEST_INIT = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjE2MDQ3ZGZmMTY0YjQxYWUyMGU5NTJjZTc3ZWJiMSIsInN1YiI6IjY2NTk3OWRkNTNlYmQ1ZDY4Njk0MWI5YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lQAREVgQK8S1vKFaFpfNAcdqrmTltFQcawdkb6miaE0",
+    Authorization: `Bearer ${process.env.REACT_APP_TMDB_API_KEY}`,
   },
 };

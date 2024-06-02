@@ -11,7 +11,7 @@ const useFetchList = (path, action, pageNo) => {
     const fetchList = async () => {
       try {
         const data = await fetch(
-          `https://api.themoviedb.org/3/${path}?language=en-US&page=${page}`,
+          `https://api.themoviedb.org/3/${path}?language=en-US&page=${page}&region=IN`,
           GET_REQUEST_INIT
         );
         const response = await data.json();

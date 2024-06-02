@@ -23,6 +23,7 @@
 21. Implemented - Now playing and top rated movie list to be shown in horizontal scroll mode
 22. Used YouTube iframe API to show clips related to trending movies
 23. Implemented `useFetchList` and `useFetchTrending` to fetch data from TMDB API
+24. Secured API Keys from being public
 
 # Features
 
