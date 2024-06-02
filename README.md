@@ -24,6 +24,8 @@
 22. Used YouTube iframe API to show clips related to trending movies
 23. Implemented `useFetchList` and `useFetchTrending` to fetch data from TMDB API
 24. Secured API Keys from being public
+25. All API calls memoization implemented i.e. if data is available in redux store, no need to fetch again
+26. Event delegation implemented in the navbar for tab selection
 
 # Features
 
