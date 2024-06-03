@@ -8,8 +8,11 @@ const activeBrowseTabSlice = createSlice({
     setBrowseTab: (state, action) => {
       return action.payload;
     },
+    resetBrowseTab: () => {
+      return BROWSE_TAB.movies;
+    },
   },
 });
 
-export const { setBrowseTab } = activeBrowseTabSlice.actions;
+export const { setBrowseTab, resetBrowseTab } = activeBrowseTabSlice.actions;
 export default activeBrowseTabSlice.reducer;

@@ -2,21 +2,35 @@ import { useRef } from "react";
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-// import { fetchSignInMethodsForEmail } from "firebase/auth";
-// import { auth } from "../../utils/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateForm } from "../../store/form";
+import { FORM_EMAIL_ID } from "../../utils/constants";
 
 const Home = () => {
   const inputRef = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleOnClick = async (e) => {
-    // const email = inputRef?.current?.value;
-    // if (!email) return;
-    // try {
-    //   const methods = await fetchSignInMethodsForEmail(auth, email);
-    //   console.log(methods);
-    // } catch (err) {
-    //   console.log(err.code);
-    // }
+  const handleOnClick = async () => {
+    const email = inputRef?.current?.value;
+    if (!email) return;
+
+    try {
+      const docRef = doc(db, "users", email);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        dispatch(updateForm({ [FORM_EMAIL_ID]: email }));
+        navigate("/login");
+      } else {
+        dispatch(updateForm({ [FORM_EMAIL_ID]: email }));
+        navigate("/signup");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

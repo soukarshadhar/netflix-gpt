@@ -7,13 +7,6 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useSelector, useDispatch } from "react-redux";
-import { removeUser } from "../../store/user";
-import { remove as removeNowPlayingMovies } from "../../store/nowPlayingMovies";
-import { remove as removeTopRatedMovies } from "../../store/topRatedMovies";
-import { remove as removeTrendingMovie } from "../../store/trendingMovie";
-import { remove as removeNowPlayingTvShows } from "../../store/nowPlayingTvShows";
-import { remove as removeTopRatedTvShows } from "../../store/topRatedTvShows";
-import { remove as removeTrendingTvShow } from "../../store/trendingTvShow";
 import { setBrowseTab } from "../../store/activeBrowseTab";
 import { BROWSE_TAB } from "../../utils/constants";
 
@@ -39,13 +32,6 @@ const Header = () => {
   const handleOnSignOutClick = async () => {
     try {
       await signOut(auth);
-      dispatch(removeUser());
-      dispatch(removeNowPlayingMovies());
-      dispatch(removeNowPlayingTvShows());
-      dispatch(removeTopRatedMovies());
-      dispatch(removeTopRatedTvShows());
-      dispatch(removeTrendingMovie());
-      dispatch(removeTrendingTvShow());
       navigate("/");
     } catch (err) {
       console.log(err.code);

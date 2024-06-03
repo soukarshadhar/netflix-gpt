@@ -47,7 +47,7 @@ const Browse = () => {
       <VideoBackground
         title={trendingVideo.title}
         description={trendingVideo.overview}
-        videoKey={trendingVideo.video?.key}
+        videoKey={trendingVideo.key}
       />
       <VideoList type={firstListType} title={title} />
       <VideoList type={secondListType} title={TOP_RATED_TITLE} />

@@ -26,6 +26,10 @@
 24. Secured API Keys from being public
 25. All API calls memoization implemented i.e. if data is available in redux store, no need to fetch again
 26. Event delegation implemented in the navbar for tab selection
+27. `Get Started` page integrated with `login` and `signup` page i.e if new user redirect to `signup` page and for existing user redirect to `login` page, used firestore to save user info.
+28. Fixed: for authenticated user, when in `browse` page and page is refreshed then user must stay in `browse` page.
+29. Implemented: responsive view of the app
+30. `Browse` page main video must play through all the videos available for the movie / tv show
 
 # Features
 

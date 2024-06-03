@@ -27,6 +27,8 @@ import trendingTvShowReducer, {
   add as addTrendingTvShowAction,
 } from "./trendingTvShow";
 
+import formReducer from "./form";
+
 import { ASSET_BY } from "../utils/constants";
 
 export const addAssetActions = {
@@ -42,6 +44,7 @@ export default configureStore({
   reducer: {
     user: userReducer,
     activeBrowseTab: activeBrowseTabReducer,
+    form: formReducer,
     [ASSET_BY.nowPlayingMovies.key]: nowPlayingMoviesReducer,
     [ASSET_BY.topRatedMovies.key]: topRatedMoviesReducer,
     [ASSET_BY.trendingMovie.key]: trendingMovieReducer,

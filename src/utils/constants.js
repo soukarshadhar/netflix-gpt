@@ -2,6 +2,9 @@ export const NOW_PLAYING_TITLE = "Now Playing";
 export const TOP_RATED_TITLE = "Top Rated";
 export const ON_THE_AIR_TITLE = "On The Air";
 export const ASSET_THUMBNAIL_URL = "https://image.tmdb.org/t/p/w154/";
+export const FORM_EMAIL_ID = "email";
+export const FORM_PASSWORD_ID = "password";
+export const FORM_NAME_ID = "name";
 
 export const BROWSE_TAB = Object.freeze({
   movies: "movies",

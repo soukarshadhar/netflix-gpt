@@ -10,25 +10,48 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import UserForm from "./components/UserForm";
 import BrowseContainer from "./components/BrowseContainer";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../src/utils/firebase";
 import store from "./store/appStore";
+import { addUser } from "./store/user";
 
 const AppLayout = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const storeUser = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (pathname === "/browse" && !user) {
-      navigate("/");
-    }
+    const authChangeListener = onAuthStateChanged(auth, (user) => {
+      const isUserLoggedIn = !!user;
 
-    if (
-      (pathname === "/" || pathname === "/login" || pathname === "/signup") &&
-      !!user
-    ) {
-      navigate("/browse");
-    }
+      if (
+        (pathname === "/" || pathname === "/login" || pathname === "/signup") &&
+        isUserLoggedIn
+      ) {
+        !storeUser &&
+          dispatch(
+            addUser({ displayName: user.displayName, email: user.email })
+          );
+        navigate("/browse");
+      }
+
+      if (pathname === "/browse" && !isUserLoggedIn) {
+        navigate("/");
+      }
+
+      if (pathname === "/browse" && isUserLoggedIn) {
+        !storeUser &&
+          dispatch(
+            addUser({ displayName: user.displayName, email: user.email })
+          );
+      }
+    });
+
+    return () => {
+      authChangeListener();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 

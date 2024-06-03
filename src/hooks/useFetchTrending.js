@@ -22,14 +22,12 @@ const useFetchTrending = (path, action, skip = false) => {
           GET_REQUEST_INIT
         );
         const itemResp = await data.json();
-        const video = itemResp.results.find(
-          (i) =>
-            i.type === "Trailer" || i.type === "Teaser" || i.type !== "OTHER"
-        );
+        const videoKeys = itemResp.results.map((i) => i.key);
         const obj = {};
+        obj["id"] = id;
         obj["title"] = title || name;
         obj["overview"] = overview;
-        obj["video"] = video;
+        obj["key"] = videoKeys.join(",");
         action && dispatch(action(obj));
       } catch (err) {
         console.log(err);

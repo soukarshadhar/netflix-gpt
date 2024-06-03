@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validate";
@@ -9,22 +9,22 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../../utils/firebase";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../store/user";
-
-const EMAIL_ID = "email";
-const PASSWORD_ID = "password";
-const FULL_NAME_ID = "fullName";
+import { auth, db } from "../../utils/firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { updateForm } from "../../store/form";
+import {
+  FORM_EMAIL_ID,
+  FORM_PASSWORD_ID,
+  FORM_NAME_ID,
+} from "../../utils/constants";
 
 const UserForm = ({ type = "signin" }) => {
-  const fullNameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
   const [errors, setErrors] = useState({});
   const [authError, setAuthError] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { name, email, password } = useSelector((state) => state.form);
 
   const handleOnSetErrors = (fieldId, field) => {
     if (field.valid) {
@@ -45,19 +45,18 @@ const UserForm = ({ type = "signin" }) => {
   };
 
   const handleOnBlur = (e) => {
-    if (e.target.id === EMAIL_ID) {
-      const emailValidation = validateEmail(emailRef?.current?.value);
+    if (e.target.id === FORM_EMAIL_ID) {
+      const emailValidation = validateEmail(email);
       handleOnSetErrors(e.target.id, emailValidation);
     }
 
-    if (e.target.id === PASSWORD_ID) {
-      const passwordValidation = validatePassword(passwordRef?.current?.value);
+    if (e.target.id === FORM_PASSWORD_ID) {
+      const passwordValidation = validatePassword(password);
       handleOnSetErrors(e.target.id, passwordValidation);
     }
 
-    if (e.target.id === FULL_NAME_ID) {
-      const isValid =
-        fullNameRef?.current?.value && fullNameRef?.current?.value.length > 0;
+    if (e.target.id === FORM_NAME_ID) {
+      const isValid = name.length > 0;
 
       handleOnSetErrors(
         e.target.id,
@@ -67,19 +66,17 @@ const UserForm = ({ type = "signin" }) => {
   };
 
   const createUser = async () => {
-    const userEmail = emailRef?.current?.value;
-    const password = passwordRef?.current?.value;
-    const name = fullNameRef?.current?.value;
-
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
-        userEmail,
+        email,
         password
       );
       await updateProfile(user, { displayName: name });
-      const { uid, email, displayName } = user;
-      dispatch(addUser({ uid, email, displayName }));
+      await setDoc(doc(db, "users", user.email), {
+        uid: user.uid,
+        displayName: user.displayName,
+      });
       navigate("/browse");
     } catch (err) {
       setAuthError(err.code);
@@ -87,17 +84,8 @@ const UserForm = ({ type = "signin" }) => {
   };
 
   const loginInUser = async () => {
-    const userEmail = emailRef?.current?.value;
-    const password = passwordRef?.current?.value;
-
     try {
-      const { user } = await signInWithEmailAndPassword(
-        auth,
-        userEmail,
-        password
-      );
-      const { uid, email, displayName } = user;
-      dispatch(addUser({ uid, email, displayName }));
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/browse");
     } catch (err) {
       setAuthError(err.code);
@@ -105,16 +93,30 @@ const UserForm = ({ type = "signin" }) => {
   };
 
   const handleOnSubmit = () => {
-    if (type === "signin" && !errors[EMAIL_ID] && !errors[PASSWORD_ID])
+    if (
+      type === "signin" &&
+      !errors[FORM_EMAIL_ID] &&
+      !errors[FORM_PASSWORD_ID]
+    )
       loginInUser();
 
     if (
       type === "signup" &&
-      !errors[EMAIL_ID] &&
-      !errors[PASSWORD_ID] &&
-      !errors[FULL_NAME_ID]
+      !errors[FORM_EMAIL_ID] &&
+      !errors[FORM_PASSWORD_ID] &&
+      !errors[FORM_NAME_ID]
     )
       createUser();
+  };
+
+  const handleOnChange = (e) => {
+    if (
+      e.target.id === FORM_EMAIL_ID ||
+      e.target.id === FORM_NAME_ID ||
+      e.target.id === FORM_PASSWORD_ID
+    ) {
+      dispatch(updateForm({ [e.target.id]: e.target.value }));
+    }
   };
 
   const renderError = (id) => {
@@ -136,37 +138,40 @@ const UserForm = ({ type = "signin" }) => {
         {type === "signup" && (
           <FloatingLabel className="mb-3 text-white" label="Name">
             <Form.Control
-              id={FULL_NAME_ID}
-              ref={fullNameRef}
+              id={FORM_NAME_ID}
               className="bg-black bg-opacity-75 text-light"
               type="text"
               placeholder="Name"
               onBlur={handleOnBlur}
+              onChange={handleOnChange}
+              value={name}
             />
-            {renderError(FULL_NAME_ID)}
+            {renderError(FORM_NAME_ID)}
           </FloatingLabel>
         )}
         <FloatingLabel className="mb-3 text-white" label="Email">
           <Form.Control
-            id={EMAIL_ID}
-            ref={emailRef}
+            id={FORM_EMAIL_ID}
             className="bg-black bg-opacity-75 text-light"
             type="email"
             placeholder="Email"
             onBlur={handleOnBlur}
+            onChange={handleOnChange}
+            value={email}
           />
-          {renderError(EMAIL_ID)}
+          {renderError(FORM_EMAIL_ID)}
         </FloatingLabel>
         <FloatingLabel className="mb-3 text-white" label="Password">
           <Form.Control
-            id={PASSWORD_ID}
-            ref={passwordRef}
+            id={FORM_PASSWORD_ID}
             className="bg-black bg-opacity-75 text-light"
             type="password"
             placeholder="Password"
             onBlur={handleOnBlur}
+            onChange={handleOnChange}
+            value={password}
           />
-          {renderError(PASSWORD_ID)}
+          {renderError(FORM_PASSWORD_ID)}
         </FloatingLabel>
         <Button className="w-100 btn-submit" onClick={handleOnSubmit}>
           {type === "signin" ? "Sign In" : "Sign Up"}
