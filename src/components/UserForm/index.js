@@ -128,60 +128,58 @@ const UserForm = ({ type = "signin" }) => {
   };
 
   return (
-    <div className="container-fluid position-absolute h-100 bg-black bg-opacity-50">
-      <div className="row">
-        <div className="col-9 col-sm-8 col-md-7 col-lg-6 col-xl-5 form-card mx-auto bg-black bg-opacity-75 rounded-2">
-          <h1 className="text-light mb-4">
-            {type === "signin" ? "Sign In" : "Sign Up"}
-          </h1>
-          {type === "signup" && (
-            <FloatingLabel className="mb-3 text-white" label="Name">
-              <Form.Control
-                id={FULL_NAME_ID}
-                ref={fullNameRef}
-                className="bg-black bg-opacity-75 text-light"
-                type="text"
-                placeholder="Name"
-                onBlur={handleOnBlur}
-              />
-              {renderError(FULL_NAME_ID)}
-            </FloatingLabel>
-          )}
-          <FloatingLabel className="mb-3 text-white" label="Email">
+    <div className="h-100 w-100 form-container">
+      <div className="form-card mx-auto bg-black bg-opacity-75 rounded-3">
+        <h1 className="text-light mb-4">
+          {type === "signin" ? "Sign In" : "Sign Up"}
+        </h1>
+        {type === "signup" && (
+          <FloatingLabel className="mb-3 text-white" label="Name">
             <Form.Control
-              id={EMAIL_ID}
-              ref={emailRef}
+              id={FULL_NAME_ID}
+              ref={fullNameRef}
               className="bg-black bg-opacity-75 text-light"
-              type="email"
-              placeholder="Email"
+              type="text"
+              placeholder="Name"
               onBlur={handleOnBlur}
             />
-            {renderError(EMAIL_ID)}
+            {renderError(FULL_NAME_ID)}
           </FloatingLabel>
-          <FloatingLabel className="mb-3 text-white" label="Password">
-            <Form.Control
-              id={PASSWORD_ID}
-              ref={passwordRef}
-              className="bg-black bg-opacity-75 text-light"
-              type="password"
-              placeholder="Password"
-              onBlur={handleOnBlur}
-            />
-            {renderError(PASSWORD_ID)}
-          </FloatingLabel>
-          <Button className="w-100 btn-submit" onClick={handleOnSubmit}>
-            {type === "signin" ? "Sign In" : "Sign Up"}
-          </Button>
-          {authError && <div className="error-message mt-1">{authError}</div>}
-          {type === "signin" && (
-            <div className="text-light mt-4">
-              New to Netflix?{" "}
-              <Link className="text-light" to="/signup">
-                Sign up now.
-              </Link>
-            </div>
-          )}
-        </div>
+        )}
+        <FloatingLabel className="mb-3 text-white" label="Email">
+          <Form.Control
+            id={EMAIL_ID}
+            ref={emailRef}
+            className="bg-black bg-opacity-75 text-light"
+            type="email"
+            placeholder="Email"
+            onBlur={handleOnBlur}
+          />
+          {renderError(EMAIL_ID)}
+        </FloatingLabel>
+        <FloatingLabel className="mb-3 text-white" label="Password">
+          <Form.Control
+            id={PASSWORD_ID}
+            ref={passwordRef}
+            className="bg-black bg-opacity-75 text-light"
+            type="password"
+            placeholder="Password"
+            onBlur={handleOnBlur}
+          />
+          {renderError(PASSWORD_ID)}
+        </FloatingLabel>
+        <Button className="w-100 btn-submit" onClick={handleOnSubmit}>
+          {type === "signin" ? "Sign In" : "Sign Up"}
+        </Button>
+        {authError && <div className="error-message mt-1">{authError}</div>}
+        {type === "signin" && (
+          <div className="text-light mt-4">
+            New to Netflix?{" "}
+            <Link className="text-light" to="/signup">
+              Sign up now.
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

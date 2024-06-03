@@ -3,7 +3,7 @@ const Logo = ({ className }) => {
     <svg
       viewBox="0 0 111 30"
       aria-hidden="true"
-      className={className}
+      className={`logo${className ? ` ${className}` : ""}`}
       fill="currentColor"
     >
       <g>

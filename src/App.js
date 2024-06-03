@@ -33,10 +33,10 @@ const AppLayout = () => {
   }, [pathname]);
 
   return (
-    <>
+    <div className={pathname === "/browse" ? "" : "app-container"}>
       <Header />
       <Outlet />
-    </>
+    </div>
   );
 };
 
@@ -47,27 +47,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <div className="netflix-background z-0">
-            <Home />
-          </div>
-        ),
+        element: <Home />,
       },
       {
         path: "login",
-        element: (
-          <div className="netflix-background z-0">
-            <UserForm />
-          </div>
-        ),
+        element: <UserForm />,
       },
       {
         path: "signup",
-        element: (
-          <div className="netflix-background z-0">
-            <UserForm type="signup" />
-          </div>
-        ),
+        element: <UserForm type="signup" />,
       },
       {
         path: "browse",

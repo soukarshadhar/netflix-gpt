@@ -10,10 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../../store/user";
 import { remove as removeNowPlayingMovies } from "../../store/nowPlayingMovies";
 import { remove as removeTopRatedMovies } from "../../store/topRatedMovies";
-import { remove as removeTrendingMovies } from "../../store/trendingMovie";
+import { remove as removeTrendingMovie } from "../../store/trendingMovie";
 import { remove as removeNowPlayingTvShows } from "../../store/nowPlayingTvShows";
 import { remove as removeTopRatedTvShows } from "../../store/topRatedTvShows";
-import { remove as removeTrendingTvShows } from "../../store/trendingTvShow";
+import { remove as removeTrendingTvShow } from "../../store/trendingTvShow";
 import { setBrowseTab } from "../../store/activeBrowseTab";
 import { BROWSE_TAB } from "../../utils/constants";
 
@@ -44,8 +44,8 @@ const Header = () => {
       dispatch(removeNowPlayingTvShows());
       dispatch(removeTopRatedMovies());
       dispatch(removeTopRatedTvShows());
-      dispatch(removeTrendingMovies());
-      dispatch(removeTrendingTvShows());
+      dispatch(removeTrendingMovie());
+      dispatch(removeTrendingTvShow());
       navigate("/");
     } catch (err) {
       console.log(err.code);
@@ -65,14 +65,14 @@ const Header = () => {
 
   return (
     <Navbar
-      className={`header-container pt-3 w-100 position-absolute z-1${
+      className={`header-container w-100 position-absolute z-1${
         pathname === "/browse" ? " browse-header" : ""
       }`}
       data-bs-theme="dark"
     >
-      <Navbar.Brand as="span">
+      <Navbar.Brand className="py-0" as="span">
         <Link to="/">
-          <Logo className={pathname === "/browse" ? "logo-sm" : "logo-md"} />
+          <Logo className={pathname === "/browse" ? "logo-sm" : ""} />
         </Link>
       </Navbar.Brand>
       <Nav className="w-100" onClick={handleOnSetActiveTab}>
@@ -108,7 +108,7 @@ const Header = () => {
           </>
         )}
         {pathname === "/" && (
-          <Nav.Link className="ms-auto" as="span">
+          <Nav.Link className="ms-auto px-0" as="span">
             <Link
               to="/login"
               className="btn-signin text-decoration-none text-light px-3 py-2 rounded-1"
@@ -118,7 +118,7 @@ const Header = () => {
           </Nav.Link>
         )}
         {pathname === "/browse" && !!user && (
-          <Nav.Link className="ms-auto" as="span">
+          <Nav.Link className="ms-auto p-0" as="span">
             <Dropdown align="end">
               <Dropdown.Toggle
                 as={CustomToggle}

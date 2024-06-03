@@ -13,34 +13,19 @@ html {
 body {
   margin: 0;
   height: 100%;
-  background-color: $black;
   font-family: sans-serif;
+  background-color: $black;
 }
 
 #root {
   height: 100%;
 }
 
-.netflix-background {
+.app-container {
   background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/a99688ca-33c3-4099-9baa-07a2e2acb398/ca15fd28-b624-4852-8bfe-9cdd5c88475d/IN-en-20240520-popsignuptwoweeks-perspective_alpha_website_small.jpg");
-  height: 100%;
   background-size: cover;
   background-position: center;
-}
-
-.logo-md {
-  color: $netflix-primary-color;
-  height: 2.5rem;
-}
-
-.logo-sm {
-  color: $netflix-primary-color;
-  height: 1.8rem;
-}
-
-.title {
-  font-weight: 900;
-  font-size: 3rem;
+  height: 100%;
 }
 
 .btn-signin {
@@ -61,18 +46,19 @@ body {
 }
 
 .header-container {
-  padding-right: $spacer * 3;
-  padding-left: $spacer * 3;
+  padding-right: $spacer * 2;
+  padding-left: $spacer * 2;
+  padding-top: $spacer * 1.5;
+  padding-bottom: $spacer * 1.5;
 }
 
 .about-video {
-  margin-right: $spacer * 40;
-  margin-left: $spacer * 3;
-  top: 30%;
+  margin-left: 2.32rem;
+  padding-bottom: 10rem;
 }
 
 .video-iframe {
-  transform: translateY(-90px);
+  transform: scale(1.4);
 }
 
 .pt-6 {
@@ -84,33 +70,14 @@ body {
   margin-right: $spacer * 21;
 }
 
-.bg-dark-gradient {
-  background-image: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0),
-    rgba(0, 0, 0, 0.75) 70%
-  );
-}
-
 .browse-header {
+  padding-left: 2.32rem;
+  padding-right: 2.32rem;
   background-image: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0),
-    rgba(0, 0, 0, 0.5) 40%
+    rgb(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.7) 70%
   );
-}
-
-.form-card {
-  padding: 2rem 3rem;
-  margin-top: $spacer * 6.5;
-}
-
-.home {
-  margin-top: 11rem;
-}
-
-.video-description {
-  height: 5rem;
 }
 
 .btn-submit {
@@ -155,11 +122,163 @@ body {
 .user-profile-icon {
   color: $netflix-primary-color;
 }
-
 .list-container {
-  transform: translateY(-14rem);
+  transform: translateY(-10rem);
 }
 
-.list-container > #list {
+.list-container > h5 {
+  padding: 0 2.32rem 0 2.32rem;
+}
+
+.list {
+  padding: 0 2.32rem 0 2.32rem;
+}
+
+.list > div {
   white-space: nowrap;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.list > div::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.list > #right-arrow {
+  position: absolute;
+  height: 100%;
+  width: 2.32rem;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: $white;
+  cursor: pointer;
+}
+
+.list > #left-arrow {
+  position: absolute;
+  height: 100%;
+  width: 2.32rem;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  color: $white;
+  cursor: pointer;
+}
+
+.video-background {
+  transform: translateY(-90px);
+}
+
+.form-container {
+  padding-top: 5.75rem;
+  background-color: $black;
+}
+
+.logo-sm {
+  color: $netflix-primary-color;
+  height: 1.5rem !important;
+}
+
+.logo {
+  color: $netflix-primary-color;
+  height: 1.5rem;
+}
+
+.home {
+  padding-top: 7.9rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(0, 0, 0, 0.75) 70%
+  );
+}
+
+.home-title {
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.home-instruction {
+  margin-top: 1.5rem;
+}
+
+.form-card {
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.video-description {
+  display: none;
+}
+
+@include media-breakpoint-up(sm) {
+  .home {
+    padding-top: 10.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.75) 70%
+    );
+  }
+  .form-card {
+    padding: 3rem 4.25rem;
+    max-width: 450px;
+  }
+  .form-container {
+    padding-top: 5.75rem;
+    background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.5) 0%
+    );
+    background-color: unset;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .home {
+    padding-top: 12.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.75) 70%
+    );
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .logo {
+    color: $netflix-primary-color;
+    height: 2.5rem;
+  }
+  .home {
+    padding-top: 17.4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-image: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0),
+      rgba(0, 0, 0, 0.75) 70%
+    );
+  }
+  .home-title {
+    font-weight: 900;
+    font-size: 3rem;
+  }
+  .video-description {
+    display: block;
+    max-width: 40rem;
+  }
 }
