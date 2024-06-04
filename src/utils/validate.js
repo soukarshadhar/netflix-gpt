@@ -28,8 +28,8 @@ export const validatePassword = (password) => {
     messages.push("atleast one special character (@ # *)");
   }
 
-  if (!/^.{4,10}$/g.test(password)) {
-    messages.push("between 4 and 10 characters");
+  if (!/^.{6,}$/g.test(password)) {
+    messages.push("atleast 6 characters");
   }
 
   if (messages.length === 0) return { valid: true };

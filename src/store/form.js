@@ -1,30 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  FORM_EMAIL_ID,
-  FORM_NAME_ID,
-  FORM_PASSWORD_ID,
-} from "../utils/constants";
+import { FORM_FIELD_TYPE } from "../utils/constants";
 
 const formSlice = createSlice({
   name: "form",
   initialState: {
-    [FORM_NAME_ID]: "",
-    [FORM_EMAIL_ID]: "",
-    [FORM_PASSWORD_ID]: "",
+    [FORM_FIELD_TYPE.name]: { value: "", error: null },
+    [FORM_FIELD_TYPE.email]: { value: "", error: null },
+    [FORM_FIELD_TYPE.password]: { value: "", error: null },
   },
   reducers: {
-    updateForm: (state, action) => {
-      return { ...state, ...action.payload };
+    updateFormValue: (state, action) => {
+      state[action.payload.id].value = action.payload.value;
+    },
+    updateFormError: (state, action) => {
+      state[action.payload.id].error = action.payload.value;
     },
     clearForm: () => {
       return {
-        [FORM_NAME_ID]: "",
-        [FORM_EMAIL_ID]: "",
-        [FORM_PASSWORD_ID]: "",
+        [FORM_FIELD_TYPE.name]: { value: "", error: null },
+        [FORM_FIELD_TYPE.email]: { value: "", error: null },
+        [FORM_FIELD_TYPE.password]: { value: "", error: null },
       };
     },
   },
 });
 
-export const { updateForm, clearForm } = formSlice.actions;
+export const { updateFormValue, updateFormError, clearForm } =
+  formSlice.actions;
 export default formSlice.reducer;

@@ -6,8 +6,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateForm } from "../../store/form";
-import { FORM_EMAIL_ID } from "../../utils/constants";
+import { updateFormValue } from "../../store/form";
+import { FORM_FIELD_TYPE } from "../../utils/constants";
 
 const Home = () => {
   const inputRef = useRef(null);
@@ -21,12 +21,11 @@ const Home = () => {
     try {
       const docRef = doc(db, "users", email);
       const docSnap = await getDoc(docRef);
+      dispatch(updateFormValue({ id: FORM_FIELD_TYPE.email, value: email }));
       if (docSnap.exists()) {
-        dispatch(updateForm({ [FORM_EMAIL_ID]: email }));
         navigate("/login");
       } else {
-        dispatch(updateForm({ [FORM_EMAIL_ID]: email }));
-        navigate("/signup");
+        navigate("/signup", { state: { skipExistingEmailCheck: true } });
       }
     } catch (err) {
       console.log(err);
