@@ -3,7 +3,10 @@ import Logo from "../Logo";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Dropdown, Navbar, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserCircle,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useSelector, useDispatch } from "react-redux";
@@ -41,7 +44,7 @@ const Header = () => {
   const handleOnSetActiveTab = (e) => {
     const tabId = e.target.id;
     if (
-      BROWSE_TAB.GPTSearch === tabId ||
+      BROWSE_TAB.search === tabId ||
       BROWSE_TAB.movies === tabId ||
       BROWSE_TAB.tvShows === tabId
     ) {
@@ -51,7 +54,7 @@ const Header = () => {
 
   return (
     <Navbar
-      className={`header-container w-100 position-absolute z-1${
+      className={`header-container w-100 position-fixed z-1${
         pathname === "/browse" ? " browse-header" : ""
       }`}
       data-bs-theme="dark"
@@ -82,15 +85,6 @@ const Header = () => {
             >
               TV Shows
             </Nav.Link>
-            <Nav.Link
-              id={BROWSE_TAB.GPTSearch}
-              active={activeTab === BROWSE_TAB.GPTSearch}
-              className="py-0 my-auto"
-              as="span"
-              role="button"
-            >
-              GPT Search
-            </Nav.Link>
           </>
         )}
         {pathname === "/" && (
@@ -104,34 +98,48 @@ const Header = () => {
           </Nav.Link>
         )}
         {pathname === "/browse" && !!user && (
-          <Nav.Link className="ms-auto p-0" as="span">
-            <Dropdown align="end">
-              <Dropdown.Toggle
-                as={CustomToggle}
-                id="dropdown-custom-components"
-              >
-                <FontAwesomeIcon
-                  className="fs-2 user-profile-icon"
-                  icon={faUserCircle}
-                />
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                {user?.displayName && (
-                  <Dropdown.Item as="span" className="fw-bold">
-                    Welcome {user.displayName}
-                  </Dropdown.Item>
-                )}
-                <Dropdown.Item
-                  as="span"
-                  role="button"
-                  onClick={handleOnSignOutClick}
+          <>
+            <Nav.Link
+              active={activeTab === BROWSE_TAB.search}
+              className="ms-auto py-0 my-auto pe-3"
+              as="span"
+              role="button"
+            >
+              <FontAwesomeIcon
+                id={BROWSE_TAB.search}
+                className="fs-4"
+                icon={faMagnifyingGlass}
+              />
+            </Nav.Link>
+            <Nav.Link className="py-0 pe-0" as="span">
+              <Dropdown align="end">
+                <Dropdown.Toggle
+                  as={CustomToggle}
+                  id="dropdown-custom-components"
                 >
-                  Sign Out
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav.Link>
+                  <FontAwesomeIcon
+                    className="fs-2 user-profile-icon"
+                    icon={faUserCircle}
+                  />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {user?.displayName && (
+                    <Dropdown.Item as="span" className="fw-bold">
+                      Welcome {user.displayName}
+                    </Dropdown.Item>
+                  )}
+                  <Dropdown.Item
+                    as="span"
+                    role="button"
+                    onClick={handleOnSignOutClick}
+                  >
+                    Sign Out
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Nav.Link>
+          </>
         )}
       </Nav>
     </Navbar>

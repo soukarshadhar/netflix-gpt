@@ -28,6 +28,7 @@ import trendingTvShowReducer, {
 } from "./trendingTvShow";
 
 import formReducer from "./form";
+import searchReducer from "./search";
 
 import { ASSET_BY } from "../utils/constants";
 
@@ -45,6 +46,7 @@ export default configureStore({
     user: userReducer,
     activeBrowseTab: activeBrowseTabReducer,
     form: formReducer,
+    search: searchReducer,
     [ASSET_BY.nowPlayingMovies.key]: nowPlayingMoviesReducer,
     [ASSET_BY.topRatedMovies.key]: topRatedMoviesReducer,
     [ASSET_BY.trendingMovie.key]: trendingMovieReducer,

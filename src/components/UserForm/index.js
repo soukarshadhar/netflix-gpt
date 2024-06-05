@@ -13,13 +13,14 @@ import { auth, db } from "../../utils/firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFormValue, updateFormError } from "../../store/form";
+import { addUser } from "../../store/user";
 import {
   FORM_FIELD_TYPE,
-  buildFormConfig,
   SIGN_IN_LABEL,
   SIGN_UP_LABEL,
   FORM_TYPE,
 } from "../../utils/constants";
+import { buildFormConfig } from "../../utils/functions";
 
 const UserForm = ({ type }) => {
   const [authError, setAuthError] = useState("");
@@ -84,7 +85,7 @@ const UserForm = ({ type }) => {
         uid: user.uid,
         displayName: user.displayName,
       });
-
+      dispatch(addUser({ displayName: user.displayName, email: user.email }));
       navigate("/browse");
     } catch (err) {
       setAuthError(err.code);

@@ -30,6 +30,7 @@
 28. Fixed: for authenticated user, when in `browse` page and page is refreshed then user must stay in `browse` page.
 29. Implemented: responsive view of the app
 30. `Browse` page main video must play through all the videos available for the movie / tv show
+31. Implemented: Search page and integrated search query with Google Gen AI Gemini
 
 # Features
 

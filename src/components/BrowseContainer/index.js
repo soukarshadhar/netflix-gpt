@@ -12,6 +12,7 @@ import { remove as removeTrendingTvShow } from "../../store/trendingTvShow";
 import { resetBrowseTab } from "../../store/activeBrowseTab";
 import { clearForm } from "../../store/form";
 import { useDispatch } from "react-redux";
+import Search from "../Search";
 
 const BrowseContainer = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const BrowseContainer = () => {
 
   const activeTab = useSelector((state) => state.activeBrowseTab);
 
-  if (activeTab === BROWSE_TAB.GPTSearch) return <h1>Coming Soon...</h1>;
+  if (activeTab === BROWSE_TAB.search) return <Search />;
 
   return <Browse />;
 };
